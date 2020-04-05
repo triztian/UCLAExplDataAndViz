@@ -1,0 +1,20 @@
+My name is _Tristian Azuara_ and I've been a software engineer for about 11 years
+I'm originally from Tijuana, Mexico but I've lived in San Diego for the past 
+10 years.
+
+I studied Computer Engineering for a bit in Tijuana's local university, and 
+have worked with _most_ of the traditional technologies in application development.
+
+I've done Full Stack web development, front-end web development, mobile web 
+development, native android and iOS development and in my current role I work
+as a iOS Software Engineer for a Logistics company.
+
+I've used Python mostly for automating development tasks such as code generation, 
+data extraction and transformation, I've used SQL to prepare reports for Product
+Managers and to guide product and feature development.
+
+The company I work for internal hosts cross-department demos and just recently
+a great data-driven solution to scheduling shifts was presented by a Senior 
+Data Scientist, the project was great in terms of impact and how it was presented
+to other departments; I hope to be able to learn or get started in some learning
+some of the skills to come up with solutions in a way that my collegue did.
