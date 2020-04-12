@@ -34,7 +34,7 @@
 SELECT COUNT(*) FROM zm_data LIMIT 10;
 
 /*
- Make sure that you've compiled the extension.
+ Load the previously compiled extension.
  */
 .load ./libsqlitefunctions.dylib
 
