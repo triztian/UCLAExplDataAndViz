@@ -19,6 +19,7 @@
 	#Date,Open,High,Low,Close,Adj Close,Volume
 
  */
+ .mode csv
 .separator ','
 .import ./zm_01-10_04-09.csv zm_data 
 
@@ -46,4 +47,14 @@ SELECT
 	MEDIAN(open), 
 	STDEV(adjusted_close), 
 	AVG(volume) 
+FROM zm_data;
+
+/**
+ Calculate the number of entries, the maximum opening price and the minimum
+ opening price.
+ */
+SELECT 
+	COUNT(open), 
+	MAX(open), 
+	MIN(open) 
 FROM zm_data;
