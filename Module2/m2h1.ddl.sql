@@ -1,9 +1,9 @@
 /**
- UCLA Data Exploration and Visualization
+ UCLA Exploratory Data Analysis and Visualization
  Instructor: Ali El-Anan
 
  Module 2 - Homework 1
- Zoom Stock Prices - Data Manipulation Language (DML)
+ Zoom Stock Prices - Data Definition Language (DML)
  Tristian Azuara (tristian.azuara@gmail.com)
  */
 
