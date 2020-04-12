@@ -7,11 +7,6 @@
  Tristian Azuara (tristian.azuara@gmail.com)
  */
 
-/*
- Make sure that you've compiled the extension.
- */
-.load ./libsqlitefunctions.dylib
-
 /**
  Import the CSV data, we must defined the separator otherwise
  the import will fail.
@@ -37,6 +32,11 @@
 
  */
 SELECT COUNT(*) FROM zm_data LIMIT 10;
+
+/*
+ Make sure that you've compiled the extension.
+ */
+.load ./libsqlitefunctions.dylib
 
 /**
  Calculate the median, standard deviation and average of the open price, the 
