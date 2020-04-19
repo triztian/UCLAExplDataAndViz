@@ -1,18 +1,21 @@
 {
-  "subjects_top_term": "Legal Document", 
-
-  "subjects": {
-    "CategoryOftheLaw": 
-    				{"Code": 42}}, 
-
-  "court information": [
-    {"city": "san francisco"},
-    {"state": "ca"}
-  ], 
-
-  "summary": {
-    "as": "Public Law", 
-    "date": "2010-03-23", 
-    "text": "Patient Protection Pending"
-  }
+	"subjects_top_term": "Legal Document",
+	"subjects": {
+		"CategoryOftheLaw": {
+			"Code": 42
+		}
+	},
+	"court information": [
+		{
+			"city": "san francisco"
+		},
+		{
+			"state": "ca"
+		}
+	],
+	"summary": {
+		"as": "Public Law",
+		"date": "2010-03-23",
+		"text": "Patient Protection Pending"
+	}
 }
