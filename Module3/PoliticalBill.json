@@ -1,0 +1,15 @@
+{
+  "politicalBill": "TopBill", 
+
+  "subjects": [
+    "Reduce taxes",
+    "Build more parks",
+    "Do stuff for cities"
+  ], 
+
+  "detail": {
+    "who": "City", 
+    "date": "2010-03-23", 
+    "blob": "Patient Protection and Affordable Care Act - Title I: Quality, Affordable Health Care for All Americans..."
+  }
+}

@@ -1,7 +1,23 @@
-# Results
+# Homework 2 Results
 
-## SQLite
+There are 2 zip archives:
 
+  1. `TA_Mod2_Step1.zip`  
+    Contains the files that were used for the SQLite3 with extensions 
+	solution. It contains the DDL and DML files as well as the extension building
+	instructions.
+
+  2. `TA_Mod2_Step2.zip`  
+    Contains the python script.
+
+The CSV data file is duplicated for simplicity. The data is Zoom's stock price
+from Jan 10, 2020 to Apr 9, 2020.
+
+## SQLite (TA_Mod2_Step1)
+
+After loading the data and extensions in `zm_data.sqlite`
+
+### Extension functions
 ```
 sqlite> SELECT 
    ...> MEDIAN(open), 
@@ -10,6 +26,8 @@ sqlite> SELECT
    ...> FROM zm_data;
 105.0,23.5378485558845,10286800.0
 ```
+
+### Built-in functions
 
 ```
 sqlite> SELECT 
@@ -20,10 +38,12 @@ sqlite> SELECT
 63,160.759995,71.0
 ```
 
-## Python
+## Python (TA_Mod2_Step2)
+
+After executing the script there should be a `zm_data.python.sqlite` file:
 
 ```
-➜  Module2 git:(master) ✗ ./m2h2.py 
+./script.py 
           date        open        high         low       close  adjusted_close    volume
 0   2020-01-10   73.080002   73.800003   72.250000   73.089996       73.089996   1655100
 1   2020-01-13   73.889999   75.580002   73.800003   74.029999       74.029999   3347100
