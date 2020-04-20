@@ -34,9 +34,14 @@ pd.read_json(json_file_path)
 #E4
 #Import HTML to pandas
 
+html_file = ''
+pd.read_html() # loads an html table
+
 #E5
 # Analyze some of the data
+# See the `sale_counts_city.ipynb` notebook
 
 #E6
 # Graph some of the data
+# See the `sale_counts_city.ipynb`
 
