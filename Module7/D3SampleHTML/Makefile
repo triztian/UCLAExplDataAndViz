@@ -1,11 +1,10 @@
 .PHONY: build clean
 
-build: index.html 
+build: Tristian_Azuara_D3Sample.html 
 	@echo "Building"
 
-index.html: index.src.html data/zm_01-10_04-09.csv 
+Tristian_Azuara_D3Sample.html: index.html data/zm_01-10_04-09.csv 
 	python3 ./generate.py $^ > $@
 
-	
 clean: 
-	@rm -f index.html
+	@rm -f Tristian_Azuara_D3Sample.html

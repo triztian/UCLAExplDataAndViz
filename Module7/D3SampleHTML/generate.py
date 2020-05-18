@@ -13,12 +13,10 @@ def main():
 	template_loader = jinja2.FileSystemLoader('./')
 	template_env = jinja2.Environment(loader=template_loader)
 
-	template = template_env.get_template('index.src.html')
-	page={}
+	template = template_env.get_template(input_file)
 	logging.info(template)
 
 	print(template.render(
-		page=page,
 		entries=load_data_entries(input_data)
 	))
 
