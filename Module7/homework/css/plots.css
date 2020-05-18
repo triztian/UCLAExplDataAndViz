@@ -1,0 +1,45 @@
+body {
+	font: 10px sans-serif;
+  }
+  
+  .axis path,
+  .axis line {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+  }
+  
+  .x.axis path {
+	display: none;
+  }
+  
+  .line {
+	fill: none;
+	stroke: steelblue;
+	stroke-width: 1.5px;
+  }
+
+/* Table Style */
+
+table {
+	margin: 0 auto 0 auto;
+}
+
+/* Price Chart */
+
+.chart-column > div {
+	width: 100%;
+	height: 450px;
+}
+
+#price-chart > .mdl-card__actions {
+	height: 52px;
+	padding: 16px;
+	background: rgba(0, 0, 0, 0.2);
+}
+
+.demo-card-image__filename {
+	color: #fff;
+	font-size: 14px;
+	font-weight: 500;
+}
