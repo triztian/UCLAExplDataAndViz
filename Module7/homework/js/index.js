@@ -46,53 +46,69 @@ function createPricesChart(entries) {
 	let svgContainer = d3.select(svg.node().parentNode)
 	let containerBBox = svgContainer.node().getBoundingClientRect()
 
-	let	margin = { top: 15, right: 35, bottom: 15, left: 35 },
-		width = containerBBox.width - margin.left - margin.right,
-		height = containerBBox.height - margin.top - margin.bottom;
-	
 	svg.attr("width", containerBBox.width)
 	svg.attr("height", containerBBox.height)
 
+	let	margin = { top: 20, right: 20, bottom: 5, left: 20 },
+		width = containerBBox.width - margin.left - margin.right,
+		height = containerBBox.height - margin.top - margin.bottom;
+	
+
 	console.log('SVG Prices', svg)
 
+	// X-Axis
 	let x = d3.scaleTime()
 		.domain(d3.extent(entries, d => d[0]))
 		.rangeRound([margin.left, width - margin.right])
+	svg.append('g')
+		.attr('class', 'x-axis')
+		.attr('transform', `translate(0, ${(height - margin.bottom)})`)
+		.call(d3.axisBottom(x).tickFormat(d3.timeFormat("%m/%d")));
 
+	// Y-Axis
 	let y = d3.scaleLinear()
 		.domain(d3.extent(allPrices(entries)))
 		.rangeRound([height, 0])
+	svg.append('g')
+		.attr('class', 'y-axis')
+		.attr("transform", `translate(${margin.left}, 0)`)
+		.call(d3.axisLeft(y));
 
-	let z = d3.scaleOrdinal(d3.schemeCategory10);
+	let colors = d3.scaleOrdinal(d3.schemeCategory10);
 
-	svg.append("g")
-		.attr("class", "x-axis")
-		.attr("transform", "translate(0," + (height - margin.bottom) + ")")
-		.call(d3.axisBottom(x).tickFormat(d3.timeFormat("%b %y")));
-
-	svg.append("g")
-		.attr("class", "y-axis")
-		.attr("transform", "translate(" + margin.left + ",0)");
-
-	let dataHigh = entries.map((e) => {
-		return [e[0], e[1]]
+	createLine(svg, margin, entries, { color: colors(0), name: 'Open' }, {
+		x: x, y: y,
+		data: (e) => {
+			return [e[0], e[1]]
+		}
 	})
 
-	// Add the line
-	svg.append("path")
-		.datum(dataHigh)
+	createLine(svg, margin, entries, { color: colors(1), name: 'High' }, {
+		x: x, y: y,
+		data: (e) => { return [e[0], e[2]] }
+	})
+
+	createLine(svg, margin, entries, { color: colors(2), name: 'Low' }, {
+		x: x, y: y,
+		data: (e) => { return [e[0], e[3]] }
+	})
+}
+
+function createLine(svgSelection, margin, entries, legend, plotter) {
+	let data = entries.map(plotter.data)
+	svgSelection.append("path")
+		.datum(data)
 		.attr("fill", "none")
-		.attr("stroke", "steelblue")
+		.attr("stroke", legend.color)
 		.attr("stroke-width", 1.2)
+		.attr("transform", `translate(0, ${-margin.bottom})`)
 		.attr("d", d3.line()
-			.x(function(d) { return x(d[0]) })
-			.y(function(d) { return y(d[1]) })
+			.x(function(d) { return plotter.x(d[0]) })
+			.y(function(d) { return plotter.y(d[1]) })
 		)
-}
-
-function createAveragesChart(entries) {
 
 }
+
 
 function allPrices(entries) {
 	return entries.map(r => r.slice(1, r.length - 1)).reduce((a, c) => {
