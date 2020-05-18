@@ -22,7 +22,7 @@ function loadDataFromTable() {
 	d3.select("table")
 		.select('tbody')
 		.selectAll('tr')
-		.each(function () {
+		.each(function() {
 			let row = []
 			d3.select(this).selectAll('td').each(function (p, j) {
 				if (j === 0) {
@@ -75,32 +75,27 @@ function createPricesChart(entries) {
 
 	let colors = d3.scaleOrdinal(d3.schemeCategory10);
 
-	createLine(svg, margin, entries, {color: colors(0), name: 'Open' }, {
-		x: x, y: y,
-		data: (e) => {
-			return [e[0], e[1]]
-		}
+	let groups = [
+		{ name: 'Open', color: colors(0), data: e => [e[0], e[1]] },
+		{ name: 'High', color: colors(1), data: e => [e[0], e[2]] },
+		{ name: 'Low', color: colors(2), data: e => [e[0], e[3]] }
+	]
+
+	groups.forEach(g => {
+		createLine(svg, margin, entries, 
+			{color: g.color, name: g.name}, {x, y, data: g.data})
 	})
 
-	createLine(svg, margin, entries, {color: colors(1), name: 'High' }, {
-		x: x, y: y,
-		data: (e) => { return [e[0], e[2]] }
-	})
-
-	createLine(svg, margin, entries, {color: colors(2), name: 'Low' }, {
-		x: x, y: y,
-		data: (e) => { return [e[0], e[3]] }
-	})
-
+	// Create the legends for the lines. These have to be created separately
+	// and as a group in order to calculate the spacing correctly.
 	createLegends(svg, {
 		width: width, height: height, margin: margin
-	}, [
-		{ name: 'Open', color: colors(0) },
-		{ name: 'High', color: colors(1) },
-		{ name: 'Low', color: colors(2) }
-	])
+	}, groups.map(g => {return {color: g.color, name: g.name}}))
 }
 
+/**
+ * Creates a line in the plot.
+ */
 function createLine(svgSelection, margin, entries, legend, plotter) {
 	let data = entries.map(plotter.data)
 	svgSelection.append("path")
@@ -113,16 +108,20 @@ function createLine(svgSelection, margin, entries, legend, plotter) {
 			.x(function(d) { return plotter.x(d[0]) })
 			.y(function(d) { return plotter.y(d[1]) })
 		)
-	
 }
 
+/**
+ * Creates a list of lengends on the top-right corner of the plot.
+ */
 function createLegends(svgSelection, container, plotters) {
 	const radius = 5, legendHeight = radius * 2.5
 
 	plotters.forEach((plt, i) => {
-		let legend = svgSelection.append('g')
 		let circleCenterX = container.width - container.margin.right - radius
-		let circleCenterY = container.margin.top + radius + i * legendHeight - legendHeight / 2
+		let circleCenterY = container.margin.top + radius +
+			i * legendHeight - legendHeight / 2
+
+		let legend = svgSelection.append('g')
 		legend.append('circle')
 			.attr('cx', circleCenterX)
 			.attr('cy', circleCenterY)
