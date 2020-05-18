@@ -53,7 +53,6 @@ function createPricesChart(entries) {
 		width = containerBBox.width - margin.left - margin.right,
 		height = containerBBox.height - margin.top - margin.bottom;
 	
-
 	console.log('SVG Prices', svg)
 
 	// X-Axis
@@ -76,22 +75,30 @@ function createPricesChart(entries) {
 
 	let colors = d3.scaleOrdinal(d3.schemeCategory10);
 
-	createLine(svg, margin, entries, { color: colors(0), name: 'Open' }, {
+	createLine(svg, margin, entries, {color: colors(0), name: 'Open' }, {
 		x: x, y: y,
 		data: (e) => {
 			return [e[0], e[1]]
 		}
 	})
 
-	createLine(svg, margin, entries, { color: colors(1), name: 'High' }, {
+	createLine(svg, margin, entries, {color: colors(1), name: 'High' }, {
 		x: x, y: y,
 		data: (e) => { return [e[0], e[2]] }
 	})
 
-	createLine(svg, margin, entries, { color: colors(2), name: 'Low' }, {
+	createLine(svg, margin, entries, {color: colors(2), name: 'Low' }, {
 		x: x, y: y,
 		data: (e) => { return [e[0], e[3]] }
 	})
+
+	createLegends(svg, {
+		width: width, height: height, margin: margin
+	}, [
+		{ name: 'Open', color: colors(0) },
+		{ name: 'High', color: colors(1) },
+		{ name: 'Low', color: colors(2) }
+	])
 }
 
 function createLine(svgSelection, margin, entries, legend, plotter) {
@@ -106,12 +113,37 @@ function createLine(svgSelection, margin, entries, legend, plotter) {
 			.x(function(d) { return plotter.x(d[0]) })
 			.y(function(d) { return plotter.y(d[1]) })
 		)
-
+	
 }
 
+function createLegends(svgSelection, container, plotters) {
+	const radius = 5, legendHeight = radius * 2.5
 
+	plotters.forEach((plt, i) => {
+		let legend = svgSelection.append('g')
+		let circleCenterX = container.width - container.margin.right - radius
+		let circleCenterY = container.margin.top + radius + i * legendHeight - legendHeight / 2
+		legend.append('circle')
+			.attr('cx', circleCenterX)
+			.attr('cy', circleCenterY)
+			.attr('r', radius)
+			.style('fill', plt.color)
+
+		legend.append('text')
+			.attr('x', circleCenterX + radius + 4)
+			.attr('y', circleCenterY)
+			.attr("text-anchor", "left")
+			.attr("font-size", '9')
+			.attr("alignment-baseline", "middle")
+			.text(plt.name)
+	})
+}
+
+/**
+ * Obtains all of the prices for open, high, low, close and adjusted close.
+ */
 function allPrices(entries) {
-	return entries.map(r => r.slice(1, r.length - 1)).reduce((a, c) => {
-		return a.concat(c)
-	}, [])
+	return entries
+		.map(r => r.slice(1, r.length - 1)) // Remove Date and Volume columns
+		.reduce((a, c) => a.concat(c), [])  // flatten all of the prices 
 }
