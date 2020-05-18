@@ -6,7 +6,7 @@
 		{
 			"label": "Build",
 			"type": "shell",
-			"command": "make -C ./homework clean build",
+			"command": "make -C ${workspaceFolder}/D3SampleHTML clean build",
 			"problemMatcher": [],
 			"group": {
 				"kind": "build",

@@ -6,6 +6,22 @@ import logging
 import jinja2
 from jinja2 import Template
 
+def main():
+	input_file = sys.argv[1]
+	input_data = sys.argv[2]
+
+	template_loader = jinja2.FileSystemLoader('./')
+	template_env = jinja2.Environment(loader=template_loader)
+
+	template = template_env.get_template('index.src.html')
+	page={}
+	logging.info(template)
+
+	print(template.render(
+		page=page,
+		entries=load_data_entries(input_data)
+	))
+
 
 def load_data_entries(csv_path):
 	"""Loads the CSV data and converts it into a renderable object"""
@@ -27,19 +43,4 @@ def load_data_entries(csv_path):
 
 
 if __name__ == '__main__':
-	# Generate site
-	input_file = sys.argv[1]
-	input_data = sys.argv[2]
-
-	template_loader = jinja2.FileSystemLoader('./')
-	template_env = jinja2.Environment(loader=template_loader)
-
-	template = template_env.get_template('index.src.html')
-	page={}
-	logging.info(template)
-
-	print(template.render(
-		page=page,
-		entries=load_data_entries(input_data)
-	))
-
+	main()

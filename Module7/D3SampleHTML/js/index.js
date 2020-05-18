@@ -2,13 +2,8 @@
 	// Executed after DOMContentLoaded has fired
 	// Line charts based on the following example
 	// https://bl.ocks.org/larsenmtl/e3b8b7c2ca4787f77d78f58d41c3da91
-
 	let entries = loadDataFromTable()
-
 	createPricesChart(entries)
-	createAveragesChart(entries)
-
-	console.log('Row Data', entries)
 })();
 
 /**
@@ -49,7 +44,7 @@ function createPricesChart(entries) {
 	svg.attr("width", containerBBox.width)
 	svg.attr("height", containerBBox.height)
 
-	let	margin = { top: 20, right: 20, bottom: 5, left: 20 },
+	let	margin = { top: 10, right: 20, bottom: 5, left: 35 },
 		width = containerBBox.width - margin.left - margin.right,
 		height = containerBBox.height - margin.top - margin.bottom;
 	
@@ -70,7 +65,7 @@ function createPricesChart(entries) {
 		.rangeRound([height, 0])
 	svg.append('g')
 		.attr('class', 'y-axis')
-		.attr("transform", `translate(${margin.left}, 0)`)
+		.attr("transform", `translate(${margin.left}, ${-margin.bottom})`)
 		.call(d3.axisLeft(y));
 
 	let colors = d3.scaleOrdinal(d3.schemeCategory10);
