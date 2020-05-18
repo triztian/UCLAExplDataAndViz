@@ -2,3 +2,4 @@
 sqlite/
 *.dylib
 *.dylib.dSYM/
+index.html
