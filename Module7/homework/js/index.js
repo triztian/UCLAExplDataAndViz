@@ -105,8 +105,8 @@ function createLine(svgSelection, margin, entries, legend, plotter) {
 		.attr("stroke-width", 1.2)
 		.attr("transform", `translate(0, ${-margin.bottom})`)
 		.attr("d", d3.line()
-			.x(function(d) { return plotter.x(d[0]) })
-			.y(function(d) { return plotter.y(d[1]) })
+			.x(d => plotter.x(d[0]) )
+			.y(d => plotter.y(d[1]) )
 		)
 }
 
